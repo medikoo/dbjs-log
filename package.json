@@ -1,0 +1,24 @@
+{
+  "name": "dbjs-log",
+  "version": "0.0.0",
+  "description": "dbjs log utilitites",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "keywords": [
+    "dbjs",
+    "log"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/dbjs-log.git"
+  },
+  "dependencies": {
+    "dbjs": ""
+  },
+  "devDependencies": {
+    "tad": "0.2.x"
+  },
+  "scripts": {
+    "test": "node node_modules/tad/bin/tad"
+  },
+  "license": "MIT"
+}
