@@ -1,7 +1,7 @@
 'use strict';
 
-var delay      = require('deferred').delay
-  , resolveLog = require('./lib/resolve-log')
+var resolveLog  = require('./lib/resolve-log')
+  , restoreLogs = require('./lib/restore-logs')
 
   , unserialize;
 
@@ -12,20 +12,10 @@ unserialize = function (db, events, sourceId) {
 };
 
 module.exports = function (db, logPath/*, options*/) {
-	var options = Object(arguments[2]), sourceId = options.sourceId
-	  , interval = options.interval;
-	if (isNaN(interval)) interval = 100;
+	var options = Object(arguments[2]), sourceId = options.sourceId;
 	return resolveLog(logPath, options)(function (data) {
-		var load;
 		// Load snapshot
 		unserialize(db, data.snapshot, sourceId);
-
-		// Load log
-		if (!data.log[0]) return;
-		load = delay(function () {
-			unserialize(db, data.log.shift(), sourceId);
-			if (data.log[0]) return load();
-		}, interval);
-		return load();
+		return restoreLogs(db, data.log, options);
 	});
 };
