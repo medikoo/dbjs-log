@@ -5,7 +5,7 @@ var Database = require('dbjs')
   , path     = resolve(__dirname, '__playground/lib/resolve-log');
 
 module.exports = {
-	"Latest": function (t, a, d) {
+	Latest: function (t, a, d) {
 		var db = new Database();
 		t(db, path).done(function () {
 			a(db.moi.firstName, 'Mariusz2', "Snapshot data");
@@ -15,7 +15,7 @@ module.exports = {
 			d();
 		}, d);
 	},
-	"At": function (t, a, d) {
+	At: function (t, a, d) {
 		var db = new Database();
 		t(db, path, { at: 1400080290283378 }).done(function (data) {
 			a(db.moi.firstName, 'Mariusz', "Snapshot data");
